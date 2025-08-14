@@ -21,6 +21,6 @@
 
 ```bash
 docker-compose up -d
-
+```
 
 Откройте в браузере: http://localhost:5001
