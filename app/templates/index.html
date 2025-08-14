@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenSearch Test Task</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .search-box { margin-bottom: 20px; }
+        .result { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .result-title { font-weight: bold; margin-bottom: 5px; }
+        .filter-group { margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <h1>OpenSearch Test Task</h1>
+    
+    <form method="POST" class="search-box">
+        <input type="text" name="query" value="{{ query }}" placeholder="Search..." style="width: 300px; padding: 8px;">
+        <button type="submit">Search</button>
+        
+        <div class="filter-group">
+            <label>Content Type:</label>
+            <input type="radio" name="content_type" value="all" {% if selected_type == 'all' %}checked{% endif %}> All
+            <input type="radio" name="content_type" value="article" {% if selected_type == 'article' %}checked{% endif %}> Article
+            <input type="radio" name="content_type" value="news" {% if selected_type == 'news' %}checked{% endif %}> News
+            <input type="radio" name="content_type" value="report" {% if selected_type == 'report' %}checked{% endif %}> Report
+            <input type="radio" name="content_type" value="tutorial" {% if selected_type == 'tutorial' %}checked{% endif %}> Tutorial
+        </div>
+    </form>
+    
+    {% if results is not none %}
+        <h2>Search Results</h2>
+        
+        {% if results %}
+            {% for result in results %}
+                <div class="result">
+                    <div class="result-title">{{ result.title }}</div>
+                    <div class="result-snippet">{{ result.snippet }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
